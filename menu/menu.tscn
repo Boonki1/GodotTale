@@ -1,0 +1,294 @@
+[gd_scene load_steps=14 format=3 uid="uid://b8nfvxpffnleb"]
+
+[ext_resource type="Script" path="res://menu/menu.gd" id="1_f1lh1"]
+[ext_resource type="Script" path="res://menu/Items.gd" id="2_7m68e"]
+[ext_resource type="Texture2D" uid="uid://dw4h8wp204in" path="res://dialogue/MenuTiles.png" id="2_cehx1"]
+[ext_resource type="Script" path="res://items/Monster Candy.gd" id="3_1yhcl"]
+[ext_resource type="FontFile" uid="uid://c8p12b0evoxue" path="res://fonts/8bitoperator_jve.ttf" id="3_njm2s"]
+[ext_resource type="Script" path="res://items/Cider.gd" id="4_c31mb"]
+[ext_resource type="FontFile" uid="uid://c7kldhd32ihiq" path="res://fonts/crypt-of-tomorrow-ut-font-no-rus.ttf" id="4_qtvk1"]
+[ext_resource type="Texture2D" uid="uid://bsuyl7pwv3yk3" path="res://menu/sprites/heart.png" id="6_bwvtp"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_epo13"]
+font = ExtResource("3_njm2s")
+
+[sub_resource type="LabelSettings" id="LabelSettings_jengd"]
+font = ExtResource("3_njm2s")
+
+[sub_resource type="LabelSettings" id="LabelSettings_h6yyv"]
+font = ExtResource("4_qtvk1")
+font_size = 5
+
+[sub_resource type="LabelSettings" id="LabelSettings_buhla"]
+font = ExtResource("3_njm2s")
+
+[sub_resource type="LabelSettings" id="LabelSettings_3s1np"]
+font = ExtResource("3_njm2s")
+
+[node name="menu" type="CanvasLayer"]
+visible = false
+scale = Vector2(2, 2)
+transform = Transform2D(2, 0, 0, 2, 0, 0)
+script = ExtResource("1_f1lh1")
+
+[node name="Heart" type="Sprite2D" parent="."]
+z_index = 1
+position = Vector2(33.5, 102)
+texture = ExtResource("6_bwvtp")
+
+[node name="Items" type="Node2D" parent="."]
+script = ExtResource("2_7m68e")
+
+[node name="Monster Candy" type="Node" parent="Items"]
+script = ExtResource("3_1yhcl")
+
+[node name="Cider" type="Node" parent="Items"]
+script = ExtResource("4_c31mb")
+
+[node name="menu" type="Control" parent="Items"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Items" type="NinePatchRect" parent="Items/menu"]
+layout_mode = 0
+offset_left = 94.0
+offset_top = 26.0
+offset_right = 267.0
+offset_bottom = 207.0
+texture = ExtResource("2_cehx1")
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+
+[node name="Item1" type="Label" parent="Items/menu/Items"]
+layout_mode = 0
+offset_left = 22.0
+offset_top = 14.0
+offset_right = 110.0
+offset_bottom = 37.0
+text = "Monster Candy   X 2"
+label_settings = SubResource("LabelSettings_epo13")
+
+[node name="Item2" type="Label" parent="Items/menu/Items"]
+layout_mode = 0
+offset_left = 22.0
+offset_top = 30.0
+offset_right = 110.0
+offset_bottom = 53.0
+text = "Monster Candy   X 2"
+label_settings = SubResource("LabelSettings_epo13")
+
+[node name="Item3" type="Label" parent="Items/menu/Items"]
+layout_mode = 0
+offset_left = 22.0
+offset_top = 46.0
+offset_right = 110.0
+offset_bottom = 69.0
+text = "Monster Candy   X 2"
+label_settings = SubResource("LabelSettings_epo13")
+
+[node name="Item4" type="Label" parent="Items/menu/Items"]
+layout_mode = 0
+offset_left = 22.0
+offset_top = 62.0
+offset_right = 110.0
+offset_bottom = 85.0
+text = "Monster Candy   X 2"
+label_settings = SubResource("LabelSettings_epo13")
+
+[node name="Item5" type="Label" parent="Items/menu/Items"]
+layout_mode = 0
+offset_left = 22.0
+offset_top = 78.0
+offset_right = 110.0
+offset_bottom = 101.0
+text = "Monster Candy   X 2"
+label_settings = SubResource("LabelSettings_epo13")
+
+[node name="Item6" type="Label" parent="Items/menu/Items"]
+layout_mode = 0
+offset_left = 22.0
+offset_top = 94.0
+offset_right = 110.0
+offset_bottom = 117.0
+text = "Monster Candy   X 2"
+label_settings = SubResource("LabelSettings_epo13")
+
+[node name="Item7" type="Label" parent="Items/menu/Items"]
+layout_mode = 0
+offset_left = 22.0
+offset_top = 110.0
+offset_right = 110.0
+offset_bottom = 133.0
+text = "Monster Candy   X 2"
+label_settings = SubResource("LabelSettings_epo13")
+
+[node name="Item8" type="Label" parent="Items/menu/Items"]
+layout_mode = 0
+offset_left = 22.0
+offset_top = 127.0
+offset_right = 136.0
+offset_bottom = 150.0
+text = "Monster Candy   X 2"
+label_settings = SubResource("LabelSettings_epo13")
+
+[node name="Use" type="Label" parent="Items/menu"]
+layout_mode = 0
+offset_left = 116.0
+offset_top = 180.0
+offset_right = 137.0
+offset_bottom = 196.0
+text = "USE
+"
+label_settings = SubResource("LabelSettings_epo13")
+
+[node name="Info" type="Label" parent="Items/menu"]
+layout_mode = 0
+offset_left = 164.0
+offset_top = 180.0
+offset_right = 192.0
+offset_bottom = 196.0
+text = "INFO"
+label_settings = SubResource("LabelSettings_epo13")
+
+[node name="Drop" type="Label" parent="Items/menu"]
+layout_mode = 0
+offset_left = 220.0
+offset_top = 179.5
+offset_right = 248.0
+offset_bottom = 195.5
+text = "DROP"
+label_settings = SubResource("LabelSettings_epo13")
+
+[node name="stats" type="NinePatchRect" parent="."]
+offset_left = 16.0
+offset_top = 26.0
+offset_right = 87.0
+offset_bottom = 81.0
+texture = ExtResource("2_cehx1")
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+metadata/_edit_lock_ = true
+
+[node name="Label" type="Label" parent="stats"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 4.0
+offset_right = 67.0
+offset_bottom = 22.0
+text = "CHARA"
+label_settings = SubResource("LabelSettings_jengd")
+metadata/_edit_lock_ = true
+
+[node name="LV" type="Label" parent="stats"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 24.0
+offset_right = 67.0
+offset_bottom = 30.0
+text = "LV"
+label_settings = SubResource("LabelSettings_h6yyv")
+metadata/_edit_lock_ = true
+
+[node name="LV2" type="Label" parent="stats"]
+layout_mode = 0
+offset_left = 26.0
+offset_top = 24.0
+offset_right = 85.0
+offset_bottom = 30.0
+text = "1
+"
+label_settings = SubResource("LabelSettings_h6yyv")
+metadata/_edit_lock_ = true
+
+[node name="HP" type="Label" parent="stats"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 33.0
+offset_right = 67.0
+offset_bottom = 39.0
+text = "HP
+"
+label_settings = SubResource("LabelSettings_h6yyv")
+metadata/_edit_lock_ = true
+
+[node name="HP2" type="Label" parent="stats"]
+layout_mode = 0
+offset_left = 26.0
+offset_top = 33.0
+offset_right = 85.0
+offset_bottom = 39.0
+text = "20/20"
+label_settings = SubResource("LabelSettings_h6yyv")
+metadata/_edit_lock_ = true
+
+[node name="G" type="Label" parent="stats"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 42.0
+offset_right = 67.0
+offset_bottom = 48.0
+text = "G
+"
+label_settings = SubResource("LabelSettings_h6yyv")
+metadata/_edit_lock_ = true
+
+[node name="G2" type="Label" parent="stats"]
+layout_mode = 0
+offset_left = 26.0
+offset_top = 42.0
+offset_right = 85.0
+offset_bottom = 48.0
+text = "0"
+label_settings = SubResource("LabelSettings_h6yyv")
+metadata/_edit_lock_ = true
+
+[node name="menu" type="NinePatchRect" parent="."]
+offset_left = 16.0
+offset_top = 84.0
+offset_right = 87.0
+offset_bottom = 158.0
+texture = ExtResource("2_cehx1")
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+metadata/_edit_lock_ = true
+
+[node name="ITEM" type="Label" parent="menu"]
+layout_mode = 0
+offset_left = 26.0
+offset_top = 9.5
+offset_right = 55.0
+offset_bottom = 25.5
+text = "ITEM"
+label_settings = SubResource("LabelSettings_buhla")
+
+[node name="STAT" type="Label" parent="menu"]
+layout_mode = 0
+offset_left = 26.0
+offset_top = 27.5
+offset_right = 55.0
+offset_bottom = 43.5
+text = "STAT"
+label_settings = SubResource("LabelSettings_3s1np")
+
+[node name="CELL" type="Label" parent="menu"]
+layout_mode = 0
+offset_left = 26.0
+offset_top = 46.0
+offset_right = 55.0
+offset_bottom = 62.0
+text = "CELL"
+label_settings = SubResource("LabelSettings_3s1np")
+
+[node name="submenus" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0

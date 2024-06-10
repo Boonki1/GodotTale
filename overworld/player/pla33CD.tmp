@@ -1,0 +1,104 @@
+[gd_scene load_steps=17 format=3 uid="uid://ca1mqvhh60lie"]
+
+[ext_resource type="Script" path="res://overworld/player/player.gd" id="1_8r2hb"]
+[ext_resource type="Texture2D" uid="uid://drq5lywreyjnp" path="res://overworld/player/sprites/spr_maincharad/spr_maincharad_0.png" id="2_4d1e3"]
+[ext_resource type="Texture2D" uid="uid://biqvx28cwt2o0" path="res://overworld/player/sprites/spr_maincharad/spr_maincharad_1.png" id="3_5jgdy"]
+[ext_resource type="Texture2D" uid="uid://wk2a65r72gr6" path="res://overworld/player/sprites/spr_maincharad/spr_maincharad_2.png" id="4_s1m21"]
+[ext_resource type="Texture2D" uid="uid://74m24ftr4jsu" path="res://overworld/player/sprites/spr_maincharad/spr_maincharad_3.png" id="5_llkmu"]
+[ext_resource type="Texture2D" uid="uid://dgtl5mx7g6ftn" path="res://overworld/player/sprites/spr_maincharal/spr_maincharal_0.png" id="6_p6fqa"]
+[ext_resource type="Texture2D" uid="uid://djbre6jpjqu4" path="res://overworld/player/sprites/spr_maincharal/spr_maincharal_1.png" id="7_obxok"]
+[ext_resource type="Texture2D" uid="uid://be0ol552hodwa" path="res://overworld/player/sprites/spr_maincharar/spr_maincharar_0.png" id="8_neafn"]
+[ext_resource type="Texture2D" uid="uid://dydanb3blkm4o" path="res://overworld/player/sprites/spr_maincharar/spr_maincharar_1.png" id="9_7awmt"]
+[ext_resource type="Texture2D" uid="uid://pcbt66s2xrv0" path="res://overworld/player/sprites/spr_maincharau/spr_maincharau_0.png" id="10_1upn1"]
+[ext_resource type="Texture2D" uid="uid://dfg8kdb4tskap" path="res://overworld/player/sprites/spr_maincharau/spr_maincharau_1.png" id="11_juc8l"]
+[ext_resource type="Texture2D" uid="uid://bdf65imaxoima" path="res://overworld/player/sprites/spr_maincharau/spr_maincharau_2.png" id="12_cm1oy"]
+[ext_resource type="Texture2D" uid="uid://ikfvge33qn6t" path="res://overworld/player/sprites/spr_maincharau/spr_maincharau_3.png" id="13_7e62k"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ouhrf"]
+size = Vector2(20, 11)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_87qlw"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_4d1e3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_5jgdy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_s1m21")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_llkmu")
+}],
+"loop": true,
+"name": &"down",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_p6fqa")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_obxok")
+}],
+"loop": true,
+"name": &"left",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_neafn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_7awmt")
+}],
+"loop": true,
+"name": &"right",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("10_1upn1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_juc8l")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_cm1oy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_7e62k")
+}],
+"loop": true,
+"name": &"up",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_av6wq"]
+size = Vector2(50.9063, 54)
+
+[node name="Player" type="CharacterBody2D" groups=["OverworldPlayer"]]
+script = ExtResource("1_8r2hb")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(2, 2)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["OverworldPlayer"]]
+position = Vector2(0, 9.5)
+shape = SubResource("RectangleShape2D_ouhrf")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_87qlw")
+animation = &"down"
+
+[node name="Interaction" type="Area2D" parent="." groups=["PlayerInteractionRange"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Interaction"]
+position = Vector2(0, 5)
+shape = SubResource("RectangleShape2D_av6wq")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Node2D" type="Node2D" parent="CanvasLayer"]

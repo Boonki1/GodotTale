@@ -1,0 +1,8 @@
+[gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://dh3sml5457ddq"]
+
+[ext_resource type="FontFile" uid="uid://c8p12b0evoxue" path="res://fonts/8bitoperator_jve.ttf" id="1_4ld5o"]
+
+[resource]
+line_spacing = 2.0
+font = ExtResource("1_4ld5o")
+shadow_size = 0

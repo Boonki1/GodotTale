@@ -1,0 +1,41 @@
+[gd_scene load_steps=5 format=3 uid="uid://c17rjmlx6esyd"]
+
+[ext_resource type="Texture2D" uid="uid://bhlkbhii5w256" path="res://overworld/rooms/BGS/area1.png" id="1_6tnku"]
+[ext_resource type="PackedScene" uid="uid://ca1mqvhh60lie" path="res://overworld/player/player.tscn" id="2_mcmpp"]
+[ext_resource type="PackedScene" uid="uid://bhututsytak7t" path="res://overworld/scene_transition.tscn" id="3_c0dw0"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_aksg0"]
+size = Vector2(40, 30)
+
+[node name="area1" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(340, 120)
+texture = ExtResource("1_6tnku")
+
+[node name="Player" parent="." instance=ExtResource("2_mcmpp")]
+position = Vector2(150, 120)
+
+[node name="Camera2D2" type="Camera2D" parent="Player"]
+zoom = Vector2(2, 2)
+limit_left = 0
+limit_top = 0
+limit_right = 680
+limit_bottom = 0
+
+[node name="Walls" type="Node" parent="."]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Walls"]
+position = Vector2(70, 40)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Walls/StaticBody2D"]
+polygon = PackedVector2Array(-10, 10, 170, 10, 170, -10, -10, -10, -50, -10, -80, 70, -70, 150, 10, 210, 150, 210, 170, 190, 590, 180, 610, 110, 590, 70, 570, 60, 530, 60, 510, 80, 230, 30, 210, 10, 170, 10, 170, 30, 210, 30, 210, 90, 210, 110, 510, 110, 530, 110, 530, 80, 570, 80, 570, 110, 590, 110, 590, 150, 190, 150, 170, 150, 170, 170, 150, 170, 150, 190, 10, 190, 10, 170, -10, 170, -10, 150, -30, 150, -30, 130, -50, 130, -50, 30, -10, 30)
+
+[node name="SceneTransition" parent="." instance=ExtResource("3_c0dw0")]
+position = Vector2(610, 140)
+scene = "area1_2"
+entryPoint = Vector2(160, 380)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SceneTransition"]
+position = Vector2(10, -5)
+shape = SubResource("RectangleShape2D_aksg0")

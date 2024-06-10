@@ -1,0 +1,204 @@
+[gd_scene load_steps=24 format=3 uid="uid://c2xy0q1vhfy23"]
+
+[ext_resource type="Texture2D" uid="uid://gq8lxuj0cddv" path="res://overworld/rooms/BGS/floweyGlow.png" id="1_snsni"]
+[ext_resource type="Texture2D" uid="uid://dq8lwt4mqsc66" path="res://overworld/NPCS/sprites/flowey/flowey.png" id="2_3uxu2"]
+[ext_resource type="PackedScene" uid="uid://ca1mqvhh60lie" path="res://overworld/player/player.tscn" id="2_tqtwm"]
+[ext_resource type="Texture2D" uid="uid://c0uxlx2v1hkrm" path="res://overworld/NPCS/sprites/flowey/laugh/spr_floweygrow/spr_floweygrow_0.png" id="3_wjxu3"]
+[ext_resource type="Texture2D" uid="uid://diwet4csitrsv" path="res://overworld/NPCS/sprites/flowey/laugh/spr_floweygrow/spr_floweygrow_1.png" id="4_gy6ql"]
+[ext_resource type="Texture2D" uid="uid://cag4wanycqgcj" path="res://overworld/NPCS/sprites/flowey/laugh/spr_floweygrow/spr_floweygrow_2.png" id="5_5rp1x"]
+[ext_resource type="Texture2D" uid="uid://dgd6lhxlepdjx" path="res://overworld/NPCS/sprites/flowey/laugh/spr_floweygrow/spr_floweygrow_3.png" id="6_krbyu"]
+[ext_resource type="Texture2D" uid="uid://5qtv3j6v28in" path="res://overworld/NPCS/sprites/flowey/laugh/spr_floweygrow/spr_floweygrow_4.png" id="7_2vfu1"]
+[ext_resource type="Texture2D" uid="uid://bu0nc5xrdel1t" path="res://overworld/NPCS/sprites/flowey/laugh/spr_floweygrow/spr_floweygrow_5.png" id="8_k7uin"]
+[ext_resource type="Texture2D" uid="uid://caxm37fxqnrm4" path="res://overworld/NPCS/sprites/flowey/laugh/spr_floweygrow/spr_floweygrow_6.png" id="9_lr1hr"]
+[ext_resource type="Texture2D" uid="uid://dmgoimb73mhc5" path="res://overworld/NPCS/sprites/flowey/laugh/spr_floweygrow/spr_floweygrow_7.png" id="10_px4fs"]
+[ext_resource type="Texture2D" uid="uid://cx670ke28010d" path="res://overworld/NPCS/sprites/flowey/laugh/spr_floweygrow/spr_floweygrow_8.png" id="11_ys1nl"]
+[ext_resource type="Texture2D" uid="uid://bk0rcs8na71u4" path="res://overworld/NPCS/sprites/flowey/laugh/spr_floweylaughoverworld/spr_floweylaughoverworld_0.png" id="12_4pitr"]
+[ext_resource type="Texture2D" uid="uid://c5cn3lnmrek86" path="res://overworld/NPCS/sprites/flowey/laugh/spr_floweylaughoverworld/spr_floweylaughoverworld_1.png" id="13_jd5rs"]
+[ext_resource type="Texture2D" uid="uid://cuqlrvn6yie2g" path="res://overworld/NPCS/sprites/flowey/laugh/spr_floweylaughoverworld/spr_floweylaughoverworld_2.png" id="14_s8hxj"]
+[ext_resource type="Texture2D" uid="uid://7ccq5jrkno7q" path="res://overworld/NPCS/sprites/flowey/flowey0.png" id="15_7fkh6"]
+[ext_resource type="PackedScene" uid="uid://c8n4841k0iklx" path="res://overworld/NPCS/scenes/textboxactivation.tscn" id="17_qhi40"]
+[ext_resource type="PackedScene" uid="uid://bhututsytak7t" path="res://overworld/scene_transition.tscn" id="18_gibjx"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qe0pw"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_3uxu2")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_wjxu3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_gy6ql")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_5rp1x")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_krbyu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_2vfu1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_k7uin")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_lr1hr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_px4fs")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_ys1nl")
+}],
+"loop": true,
+"name": &"growlaugh",
+"speed": 15.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("12_4pitr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_jd5rs")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_s8hxj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_jd5rs")
+}],
+"loop": true,
+"name": &"laugh",
+"speed": 15.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("11_ys1nl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_px4fs")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_lr1hr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_k7uin")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_2vfu1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_krbyu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_5rp1x")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_gy6ql")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_wjxu3")
+}],
+"loop": true,
+"name": &"sinklaugh",
+"speed": 15.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_3uxu2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_7fkh6")
+}],
+"loop": true,
+"name": &"talk",
+"speed": 6.0
+}]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_nebag"]
+normal = Vector2(1, 0)
+distance = -10.0
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_3tu7m"]
+normal = Vector2(-1, 0)
+distance = -10.0
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_ukkje"]
+normal = Vector2(0, 1)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_rdkfx"]
+distance = -150.0
+
+[node name="area1_2" type="Node2D"]
+position = Vector2(0, 1)
+
+[node name="FloweyGlow" type="Sprite2D" parent="."]
+position = Vector2(160, 169)
+texture = ExtResource("1_snsni")
+
+[node name="FloweySprite" type="AnimatedSprite2D" parent="."]
+position = Vector2(160, 299)
+sprite_frames = SubResource("SpriteFrames_qe0pw")
+animation = &"Idle"
+
+[node name="Player" parent="." instance=ExtResource("2_tqtwm")]
+position = Vector2(160, 380)
+startDir = 0
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+zoom = Vector2(2, 2)
+limit_left = 0
+limit_top = 0
+limit_right = 320
+limit_bottom = 420
+
+[node name="Walls" type="Node" parent="."]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Walls"]
+position = Vector2(10, 270)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Walls/StaticBody2D"]
+position = Vector2(0, 200)
+polygon = PackedVector2Array(90, -50, 80, -80, 50, -90, -10, -150, -10, -170, 10, -170, 10, -150, 30, -150, 30, -130, 50, -130, 50, -110, 90, -110, 90, -90, 110, -90, 110, -50)
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="Walls/StaticBody2D"]
+position = Vector2(300, 200)
+scale = Vector2(-1, 1)
+polygon = PackedVector2Array(90, -50, 80, -80, 50, -90, -10, -150, -10, -170, 10, -170, 10, -150, 30, -150, 30, -130, 50, -130, 50, -110, 90, -110, 90, -90, 110, -90, 110, -50)
+
+[node name="CollisionPolygon2D3" type="CollisionPolygon2D" parent="Walls/StaticBody2D"]
+position = Vector2(0, 200)
+polygon = PackedVector2Array(-10, -250, -10, -270, 10, -290, 30, -290, 50, -310, 70, -310, 90, -320, 120, -330, 130, -340, 170, -340, 180, -330, 210, -320, 230, -310, 250, -310, 270, -290, 290, -290, 310, -270, 310, -250, 290, -250, 290, -270, 250, -270, 250, -290, 210, -290, 210, -300, 170, -300, 170, -320, 130, -320, 130, -300, 90, -300, 90, -290, 50, -290, 50, -270, 10, -270, 10, -250)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/StaticBody2D"]
+shape = SubResource("WorldBoundaryShape2D_nebag")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Walls/StaticBody2D"]
+position = Vector2(300, 0)
+shape = SubResource("WorldBoundaryShape2D_3tu7m")
+
+[node name="TEXTBOXACTIVATION" parent="." node_paths=PackedStringArray("sprite") instance=ExtResource("17_qhi40")]
+position = Vector2(110, 349)
+UseButton = false
+OneTimeOnly = true
+sprite = NodePath("../FloweySprite")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TEXTBOXACTIVATION"]
+position = Vector2(50, 10)
+shape = SubResource("WorldBoundaryShape2D_ukkje")
+
+[node name="SceneTransition" parent="." instance=ExtResource("18_gibjx")]
+position = Vector2(130, 409)
+scene = "area1"
+entryPoint = Vector2(620, 150)
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="SceneTransition"]
+position = Vector2(180, -140)
+shape = SubResource("WorldBoundaryShape2D_rdkfx")

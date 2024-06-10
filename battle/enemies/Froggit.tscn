@@ -1,0 +1,110 @@
+[gd_scene load_steps=10 format=3 uid="uid://d314wg6nt1vyv"]
+
+[ext_resource type="Script" path="res://battle/enemies/Froggit.gd" id="1_n4rbr"]
+[ext_resource type="Texture2D" uid="uid://beuwy7d6u3ull" path="res://battle/sprites/enemies/froggit/spr_froglegs/spr_froglegs_0.png" id="2_rswui"]
+[ext_resource type="Texture2D" uid="uid://dnw5bt3ttlxag" path="res://battle/sprites/enemies/froggit/spr_froglegs/spr_froglegs_1.png" id="3_6ajgl"]
+[ext_resource type="Texture2D" uid="uid://bbif2cova7hga" path="res://battle/sprites/enemies/froggit/spr_froghead/spr_froghead_0.png" id="4_72sp7"]
+[ext_resource type="Texture2D" uid="uid://bew1rwrelymuv" path="res://battle/sprites/enemies/froggit/spr_froghead/spr_froghead_1.png" id="5_jni2w"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_pippy"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_rswui")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_rswui")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_rswui")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_rswui")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_6ajgl")
+}],
+"loop": true,
+"name": &"default",
+"speed": 3.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_68gsc"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_72sp7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_jni2w")
+}],
+"loop": true,
+"name": &"default",
+"speed": 0.0
+}]
+
+[sub_resource type="Animation" id="Animation_xhxtc"]
+resource_name = "Idle"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("head:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0001, 0.4, 0.8, 1.2, 1.6, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 2), Vector2(2, 3), Vector2(-7, 7), Vector2(-10, 5), Vector2(-7, 3), Vector2(0, 2)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("head:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 1]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("body:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 1,
+"values": []
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_c43na"]
+_data = {
+"Idle": SubResource("Animation_xhxtc")
+}
+
+[node name="Froggit" type="Node2D"]
+script = ExtResource("1_n4rbr")
+
+[node name="body" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_pippy")
+autoplay = "default"
+frame_progress = 0.571802
+
+[node name="head" type="AnimatedSprite2D" parent="."]
+position = Vector2(-1.42349, 2.20336)
+sprite_frames = SubResource("SpriteFrames_68gsc")
+autoplay = "default"
+frame = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_c43na")
+}
+autoplay = "Idle"

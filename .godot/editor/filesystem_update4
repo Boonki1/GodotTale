@@ -1,0 +1,14 @@
+res://battle/battle.tscn
+res://battle/battleLabels.tres
+res://dialogue/Textbox.tres
+res://overworld/rooms/scenes/test.tscn
+res://overworld/player/player.tscn
+res://overworld/NPCS/scenes/textboxactivation.tscn
+res://overworld/scene_transition.tscn
+res://global.tscn
+res://overworld/rooms/scenes/area1.tscn
+res://overworld/rooms/scenes/area1_2.tscn
+res://dialogue/Textbox.tscn
+res://menu/menu.tscn
+res://battle/heart.tscn
+res://battle/enemies/Froggit.tscn

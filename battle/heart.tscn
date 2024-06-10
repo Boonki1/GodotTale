@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://bb0t6dgghm2ws"]
+
+[ext_resource type="Texture2D" uid="uid://ceoh1qftl72so" path="res://battle/sprites/heart.png" id="1_bgy38"]
+[ext_resource type="Script" path="res://battle/heart.gd" id="1_hyp5x"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_trym4"]
+size = Vector2(16, 16)
+
+[node name="Heart" type="CharacterBody2D"]
+script = ExtResource("1_hyp5x")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_bgy38")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_trym4")

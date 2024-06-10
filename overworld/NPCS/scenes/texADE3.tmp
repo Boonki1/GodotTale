@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://c8n4841k0iklx"]
+
+[ext_resource type="Script" path="res://overworld/NPCS/scenes/TEXTBOXACTIVATION.gd" id="1_doopm"]
+
+[node name="TEXTBOXACTIVATION" type="Area2D"]
+script = ExtResource("1_doopm")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="area_exited" from="." to="." method="_on_area_exited"]
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
