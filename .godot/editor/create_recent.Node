@@ -1,7 +1,8 @@
+AudioStreamPlayer
+AnimationPlayer
 Timer
 AnimatedSprite2D
 Node2D
-AnimationPlayer
 Label
 Node
 CollisionShape2D
@@ -12,4 +13,3 @@ CharacterBody2D
 NinePatchRect
 Control
 ResourcePreloader
-PopupMenu

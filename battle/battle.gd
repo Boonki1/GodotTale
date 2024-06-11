@@ -14,8 +14,10 @@ extends Node2D
 @onready var enemyLabel = $EnemyLabel
 @onready var heart = $Heart
 @onready var slice = $Slice
+@onready var sliceSound = $Slice/AudioStreamPlayer
 @onready var target = $Target
 @onready var targetchoice = $Targetchoice
+@onready var boxSizeChange = $boxSizeChange
 
 var playerName = global.data["name"]
 var MaxHP = global.data["MaxHP"]
@@ -33,7 +35,11 @@ var LabelArray = []
 var AttackMade = false
 var AttackDisappear = false
 
+var enteredPlayerTurn = false
+var enteredEnemyTurn = false
+
 enum BattleState{
+	ENTERPLAYERTURN,
 	PLAYERTURN,
 	ENEMYTURN,
 	ENTERENEMYTURN,
@@ -59,8 +65,14 @@ func _process(delta):
 	$boxRect/boxRectCollision/right.position.x = boxRect.size.x - 1.5
 	$boxRect/boxRectCollision/bottom.position.y = boxRect.size.y - 1.5
 	
+	print(curBattleState)
+	
 	match curBattleState:
 		BattleState.PLAYERTURN:
+			battleText.visible = true
+			heart.visible = true
+			AttackMade = false
+			boxSizeChange.stop(true)
 			target.visible = false
 			target.scale.x = 1
 			target.self_modulate.a = 1
@@ -99,7 +111,11 @@ func _process(delta):
 			if Input.is_action_just_pressed("interact"):
 				for i in LabelArray:
 					i.visible = false
+				for i in enemyLabel.get_children():
+					i.queue_free()
+				LabelArray = []
 				targetchoice.position = Vector2(45,320)
+				addedEnemyLabels = false
 				curBattleState = BattleState.FIGHTSLASH
 			
 			if Input.is_action_just_pressed("cancel"):
@@ -128,14 +144,30 @@ func _process(delta):
 				targetchoice.visible = false
 		
 		BattleState.ENTERENEMYTURN:
+			enteredEnemyTurn = true
+			enteredPlayerTurn = false
 			target.scale.x -= 0.03
 			target.self_modulate.a -= 0.05
+			boxSizeChange.play("BoxShrink")
 			await get_tree().create_timer(0.4).timeout
 			heart.position = Vector2(300,320)
 			curBattleState = BattleState.ENEMYTURN
 		
 		BattleState.ENEMYTURN:
-			heart.visible = true
+			if enteredEnemyTurn:
+				heart.visible = true
+				enteredEnemyTurn = false
+				await get_tree().create_timer(5.0).timeout
+				curBattleState = BattleState.ENTERPLAYERTURN
+
+		BattleState.ENTERPLAYERTURN:
+			heart.visible = false
+			boxSizeChange.play("BoxGrow")
+			await get_tree().create_timer(0.45).timeout
+			if !enteredPlayerTurn:
+				battleText.resetLine()
+				curBattleState = BattleState.PLAYERTURN
+				enteredPlayerTurn = true
 			
 func Menu():
 	heart.position.y = 454
@@ -208,6 +240,7 @@ func ChooseEnemyMenu():
 		enemyChosen = EnemyArray[scroll]
 
 func Hit(_enemy):
+	sliceSound.play()
 	slice.frame = 0
 	slice.visible = true
 	slice.position = _enemy.position

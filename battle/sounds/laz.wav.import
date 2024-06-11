@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://tv4xpwy5rsnt"
-path="res://.godot/imported/laz.wav-fac9936e737bcab48225848fe69c8960.sample"
+path="res://.godot/imported/laz.wav-535f6acffe2e3251a7354ef70c80decb.sample"
 
 [deps]
 
-source_file="res://dialogue/sounds/laz.wav"
-dest_files=["res://.godot/imported/laz.wav-fac9936e737bcab48225848fe69c8960.sample"]
+source_file="res://battle/sounds/laz.wav"
+dest_files=["res://.godot/imported/laz.wav-535f6acffe2e3251a7354ef70c80decb.sample"]
 
 [params]
 

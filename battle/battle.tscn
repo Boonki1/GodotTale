@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://cmmskdyow6j7v"]
+[gd_scene load_steps=44 format=3 uid="uid://cmmskdyow6j7v"]
 
 [ext_resource type="Script" path="res://battle/battle.gd" id="1_biix4"]
 [ext_resource type="Texture2D" uid="uid://c6sxntpkdncjw" path="res://battle/sprites/button/act.png" id="1_i0c17"]
@@ -22,6 +22,7 @@
 [ext_resource type="PackedScene" uid="uid://harf4tcj2l83" path="res://battle/enemies/Whimsun.tscn" id="8_06lxg"]
 [ext_resource type="Texture2D" uid="uid://csesxnw1ojjpa" path="res://battle/sprites/slice/spr_slice_o/spr_slice_o_5.png" id="9_qrwid"]
 [ext_resource type="Texture2D" uid="uid://buaagrxc1pefj" path="res://battle/sprites/target/target.png" id="10_a2hoy"]
+[ext_resource type="AudioStream" uid="uid://tv4xpwy5rsnt" path="res://battle/sounds/laz.wav" id="10_jibgx"]
 [ext_resource type="LabelSettings" uid="uid://bqjgueck1kdbu" path="res://battle/battleLabels.tres" id="10_tg4yi"]
 [ext_resource type="Texture2D" uid="uid://f4o3fca7yk4n" path="res://battle/sprites/target/spr_targetchoice/spr_targetchoice_0.png" id="11_541nn"]
 [ext_resource type="Texture2D" uid="uid://dltiyb7v0ug1p" path="res://battle/sprites/HP.png" id="11_qmj8h"]
@@ -29,6 +30,96 @@
 [ext_resource type="Texture2D" uid="uid://dw4h8wp204in" path="res://dialogue/MenuTiles.png" id="12_qcm6w"]
 [ext_resource type="PackedScene" uid="uid://bb0t6dgghm2ws" path="res://battle/heart.tscn" id="13_6eybr"]
 [ext_resource type="LabelSettings" uid="uid://dh3sml5457ddq" path="res://dialogue/Textbox.tres" id="16_rm7cp"]
+
+[sub_resource type="Animation" id="Animation_xbsio"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("boxRect:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(32, 250)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("boxRect:size")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(284.5, 70)]
+}
+
+[sub_resource type="Animation" id="Animation_8gh5g"]
+resource_name = "BoxShrink"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("boxRect:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(32, 250), Vector2(241, 250)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("boxRect:size")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(284.5, 70), Vector2(77, 70)]
+}
+
+[sub_resource type="Animation" id="Animation_faxpb"]
+resource_name = "BoxGrow"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("boxRect:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(241, 250), Vector2(32, 250)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("boxRect:size")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(77, 70), Vector2(284.5, 70)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7hb73"]
+_data = {
+"BoxGrow": SubResource("Animation_faxpb"),
+"BoxShrink": SubResource("Animation_8gh5g"),
+"RESET": SubResource("Animation_xbsio")
+}
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_0uwy1"]
 animations = [{
@@ -150,8 +241,10 @@ size = Vector2(551, 3)
 position = Vector2(-2, -3)
 script = ExtResource("1_biix4")
 
-[node name="PlayerAttackTimer" type="Timer" parent="."]
-one_shot = true
+[node name="boxSizeChange" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_7hb73")
+}
 
 [node name="BG" type="AnimatedSprite2D" parent="."]
 z_index = -1
@@ -165,6 +258,10 @@ sprite_frames = SubResource("SpriteFrames_jtii2")
 autoplay = "default"
 frame = 5
 frame_progress = 1.0
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Slice"]
+stream = ExtResource("10_jibgx")
+volume_db = -20.0
 
 [node name="Target" type="Sprite2D" parent="."]
 visible = false
@@ -306,6 +403,5 @@ shape = SubResource("RectangleShape2D_yg3pf")
 position = Vector2(144, 68.5)
 shape = SubResource("RectangleShape2D_yg3pf")
 
-[connection signal="timeout" from="PlayerAttackTimer" to="." method="_on_player_attack_timer_timeout"]
 [connection signal="animation_finished" from="Slice" to="." method="_on_slice_animation_finished"]
 [connection signal="animation_looped" from="Slice" to="." method="_on_slice_animation_looped"]
