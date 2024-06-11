@@ -1,7 +1,8 @@
+Timer
 AnimatedSprite2D
 Node2D
-Label
 AnimationPlayer
+Label
 Node
 CollisionShape2D
 CollisionPolygon2D

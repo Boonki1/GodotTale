@@ -13,6 +13,9 @@ extends Node2D
 @onready var battleText = $BattleTextbox
 @onready var enemyLabel = $EnemyLabel
 @onready var heart = $Heart
+@onready var slice = $Slice
+@onready var target = $Target
+@onready var targetchoice = $Targetchoice
 
 var playerName = global.data["name"]
 var MaxHP = global.data["MaxHP"]
@@ -27,10 +30,15 @@ var enemyChosen = null
 
 var LabelArray = []
 
+var AttackMade = false
+var AttackDisappear = false
+
 enum BattleState{
 	PLAYERTURN,
 	ENEMYTURN,
-	FIGHTCHOOSE
+	ENTERENEMYTURN,
+	FIGHTCHOOSE,
+	FIGHTSLASH,
 }
 
 var curBattleState = BattleState.PLAYERTURN 
@@ -53,12 +61,17 @@ func _process(delta):
 	
 	match curBattleState:
 		BattleState.PLAYERTURN:
+			target.visible = false
+			target.scale.x = 1
+			target.self_modulate.a = 1
+			battleText.canSkip = true
 			Menu()
 			if fightSprite.frame == 1:
 				if Input.is_action_just_pressed("interact"):
 					curBattleState = BattleState.FIGHTCHOOSE
 					scroll = 0
 					battleText.visible = false
+					battleText.visible_characters = 999
 					fightSprite.frame = 0
 		
 		BattleState.FIGHTCHOOSE:
@@ -78,24 +91,52 @@ func _process(delta):
 					NameLabel.position.y = Yoffset
 					enemyLabel.add_child(NameLabel)
 					LabelArray.push_back(NameLabel)
-					print(LabelArray)
 			
 			addedEnemyLabels = true
 			
 			ChooseEnemyMenu()
 			
-			if enemyChosen != null:
-				enemyChosen.visible = false
+			if Input.is_action_just_pressed("interact"):
+				for i in LabelArray:
+					i.visible = false
+				targetchoice.position = Vector2(45,320)
+				curBattleState = BattleState.FIGHTSLASH
 			
 			if Input.is_action_just_pressed("cancel"):
 				scroll = 0
-				curBattleState = BattleState.PLAYERTURN
+				battleText.canSkip = false
+				battleText.resetLine()
 				battleText.visible = true
 				for i in enemyLabel.get_children():
 					i.queue_free()
 				LabelArray = []
 				addedEnemyLabels = false
-
+				curBattleState = BattleState.PLAYERTURN
+		
+		BattleState.FIGHTSLASH:
+			heart.visible = false
+			target.visible = true
+			targetchoice.visible = true
+			if !AttackMade:
+				targetchoice.position.x += 6
+			
+			if Input.is_action_just_pressed("interact") and !AttackMade:
+				AttackMade = true
+				Hit(EnemyArray[scroll])
+				await get_tree().create_timer(1.5).timeout
+				curBattleState = BattleState.ENTERENEMYTURN
+				targetchoice.visible = false
+		
+		BattleState.ENTERENEMYTURN:
+			target.scale.x -= 0.03
+			target.self_modulate.a -= 0.05
+			await get_tree().create_timer(0.4).timeout
+			heart.position = Vector2(300,320)
+			curBattleState = BattleState.ENEMYTURN
+		
+		BattleState.ENEMYTURN:
+			heart.visible = true
+			
 func Menu():
 	heart.position.y = 454
 	
@@ -160,10 +201,16 @@ func ChooseEnemyMenu():
 				if scroll-2 == -2:
 					scroll = LabelArray.size()-1
 		
-		print(LabelArray)
-		
 		heart.global_position.x = LabelArray[scroll].global_position.x - 16
 		heart.global_position.y = LabelArray[scroll].global_position.y + 16
 	
 	if Input.is_action_just_pressed("interact"):
 		enemyChosen = EnemyArray[scroll]
+
+func Hit(_enemy):
+	slice.frame = 0
+	slice.visible = true
+	slice.position = _enemy.position
+
+func _on_slice_animation_looped():
+	slice.visible = false

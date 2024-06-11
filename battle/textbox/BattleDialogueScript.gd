@@ -2,6 +2,7 @@ extends Node
 
 var dialogueSelected = 0
 var dialogueText = ""
+var textEffectArray = []
 
 enum dialogueList{
 	test,

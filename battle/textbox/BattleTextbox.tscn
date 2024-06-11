@@ -43,6 +43,7 @@ script = ExtResource("1_82k0d")
 script = ExtResource("2_ufs5o")
 
 [node name="Text" type="Label" parent="."]
+layout_mode = 0
 offset_right = 141.0
 offset_bottom = 16.0
 text = "*  This enemy appeared"

@@ -150,9 +150,6 @@ size = Vector2(551, 3)
 position = Vector2(-2, -3)
 script = ExtResource("1_biix4")
 
-[node name="PlayerAttackTimer" type="Timer" parent="."]
-one_shot = true
-
 [node name="BG" type="AnimatedSprite2D" parent="."]
 z_index = -1
 sprite_frames = SubResource("SpriteFrames_0uwy1")
@@ -167,19 +164,17 @@ frame = 5
 frame_progress = 1.0
 
 [node name="Target" type="Sprite2D" parent="."]
-visible = false
 z_index = 1
 position = Vector2(317, 320)
 texture = ExtResource("10_a2hoy")
 metadata/_edit_lock_ = true
 
 [node name="Targetchoice" type="AnimatedSprite2D" parent="."]
-visible = false
 z_index = 1
 position = Vector2(45, 320)
 sprite_frames = SubResource("SpriteFrames_0sqs7")
 autoplay = "default"
-frame_progress = 0.225192
+frame_progress = 0.476561
 
 [node name="EnemyLabel" type="Label" parent="."]
 z_index = 1
@@ -306,6 +301,5 @@ shape = SubResource("RectangleShape2D_yg3pf")
 position = Vector2(144, 68.5)
 shape = SubResource("RectangleShape2D_yg3pf")
 
-[connection signal="timeout" from="PlayerAttackTimer" to="." method="_on_player_attack_timer_timeout"]
 [connection signal="animation_finished" from="Slice" to="." method="_on_slice_animation_finished"]
 [connection signal="animation_looped" from="Slice" to="." method="_on_slice_animation_looped"]

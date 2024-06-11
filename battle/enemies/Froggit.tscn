@@ -1,6 +1,6 @@
-[gd_scene load_steps=10 format=3 uid="uid://d314wg6nt1vyv"]
+[gd_scene load_steps=10 format=3 uid="uid://ckjc5kaja3fbe"]
 
-[ext_resource type="Script" path="res://battle/enemies/Froggit.gd" id="1_n4rbr"]
+[ext_resource type="Script" path="res://battle/enemies/enemy.gd" id="1_r11rk"]
 [ext_resource type="Texture2D" uid="uid://beuwy7d6u3ull" path="res://battle/sprites/enemies/froggit/spr_froglegs/spr_froglegs_0.png" id="2_rswui"]
 [ext_resource type="Texture2D" uid="uid://dnw5bt3ttlxag" path="res://battle/sprites/enemies/froggit/spr_froglegs/spr_froglegs_1.png" id="3_6ajgl"]
 [ext_resource type="Texture2D" uid="uid://bbif2cova7hga" path="res://battle/sprites/enemies/froggit/spr_froghead/spr_froghead_0.png" id="4_72sp7"]
@@ -9,16 +9,7 @@
 [sub_resource type="SpriteFrames" id="SpriteFrames_pippy"]
 animations = [{
 "frames": [{
-"duration": 1.0,
-"texture": ExtResource("2_rswui")
-}, {
-"duration": 1.0,
-"texture": ExtResource("2_rswui")
-}, {
-"duration": 1.0,
-"texture": ExtResource("2_rswui")
-}, {
-"duration": 1.0,
+"duration": 3.0,
 "texture": ExtResource("2_rswui")
 }, {
 "duration": 1.0,
@@ -57,7 +48,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.0001, 0.4, 0.8, 1.2, 1.6, 2),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
 "update": 0,
-"values": [Vector2(0, 0), Vector2(0, 2), Vector2(2, 3), Vector2(-7, 7), Vector2(-10, 5), Vector2(-7, 3), Vector2(0, 2)]
+"values": [Vector2(0, 0), Vector2(0, 2), Vector2(2, 3), Vector2(-1, 7), Vector2(-10, 5), Vector2(-7, 3), Vector2(0, 2)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -90,18 +81,17 @@ _data = {
 }
 
 [node name="Froggit" type="Node2D"]
-script = ExtResource("1_n4rbr")
+script = ExtResource("1_r11rk")
 
 [node name="body" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_pippy")
 autoplay = "default"
-frame_progress = 0.571802
+frame_progress = 0.139899
 
 [node name="head" type="AnimatedSprite2D" parent="."]
-position = Vector2(-1.42349, 2.20336)
+position = Vector2(0.705633, 2.35282)
 sprite_frames = SubResource("SpriteFrames_68gsc")
 autoplay = "default"
-frame = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

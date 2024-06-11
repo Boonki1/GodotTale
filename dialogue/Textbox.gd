@@ -349,7 +349,7 @@ func _process(delta):
 			var cur_character = (line1+line2+line3)[clamp(visible_characters, 0, (line1+line2+line3).length()-1)]
 			var next_character = (line1+line2+line3)[clamp(visible_characters+1, 0 ,(line1+line2+line3).length()-1)]
 			
-			if cur_character != " " and !line3done: 
+			if cur_character != " " and !line3done:
 				audio.play()
 			
 			if line3done and parent.get_class() != "CanvasLayer":

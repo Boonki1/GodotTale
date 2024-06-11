@@ -9,10 +9,12 @@ var parent = null
 @onready var periodTimer = $"period timer"
 @onready var sprite = $CanvasLayer/AnimatedSprite2D
 @onready var animation_player = $AnimationPlayer
+@onready var battle = get_parent()
 
 const text_speed = 0.5
 const lineSpacing = 18
 var ScreenPosition = 0
+var canSkip = true
 
 var playerCamPosition = Vector2.ZERO
 
@@ -58,32 +60,32 @@ var Line2Hash = Label.new()
 var Line3Hash = Label.new()
 
 func _ready():
-	global.TextboxExists = true
 	set_up_line()
 	text.visible_characters = 0
 	text.position.x += 16
 
 func SetTextEffect(i1,i2,i3,labelX1,labelX2,labelX3,labelY1,labelY2,labelY3):
-	match textEffect:
-		dialogueScript.textEffect.NONE:
-			if line1.length() > 0 and i1 < line1.length():
-				splitLine1[i1].position = Vector2(labelX1,labelY1)
-			
-			if line2.length() > 0 and i2 < line2.length():
-				splitLine2[i2].position = Vector2(labelX2,labelY2+lineSpacing)
+	if splitLine1.size() > 0:
+		match textEffect:
+			dialogueScript.textEffect.NONE:
+				if line1.length() > 0 and i1 < line1.length():
+					splitLine1[i1].position = Vector2(labelX1,labelY1)
 				
-			if line3.length() > 0 and i3 < line3.length():
-				splitLine3[i3].position = Vector2(labelX3,labelY3+lineSpacing*2)
-		
-		dialogueScript.textEffect.GHOST:
-			if line1.length() > 0:
-				splitLine1[i1].position = Vector2(labelX1,labelY1+sin(effectTimer+i1))
-				
-			if line2.length() > 0:
-				splitLine2[i2].position = Vector2(labelX2,labelY2+lineSpacing+sin(effectTimer+i2))
+				if line2.length() > 0 and i2 < line2.length():
+					splitLine2[i2].position = Vector2(labelX2,labelY2+lineSpacing)
+					
+				if line3.length() > 0 and i3 < line3.length():
+					splitLine3[i3].position = Vector2(labelX3,labelY3+lineSpacing*2)
 			
-			if line3.length() > 0:
-				splitLine3[i3].position = Vector2(labelX3,labelY3+lineSpacing*2+sin(effectTimer+i3))
+			dialogueScript.textEffect.GHOST:
+				if line1.length() > 0:
+					splitLine1[i1].position = Vector2(labelX1,labelY1+sin(effectTimer+i1))
+					
+				if line2.length() > 0:
+					splitLine2[i2].position = Vector2(labelX2,labelY2+lineSpacing+sin(effectTimer+i2))
+				
+				if line3.length() > 0:
+					splitLine3[i3].position = Vector2(labelX3,labelY3+lineSpacing*2+sin(effectTimer+i3))
 
 func set_up_line():
 	dialogueScript.dialogueSelected = curDialogue
@@ -250,14 +252,14 @@ func _process(delta):
 			if splitLine1.size() < visible_characters:
 				line1done = true
 			
-			var visible_characters2 = visible_characters-splitLine1.size()
+			var visible_characters2 = max(0,visible_characters-splitLine1.size())
 			
 			if splitLine2.size() > visible_characters2 and line1done:
 				splitLine2[visible_characters2].visible = true
 			if splitLine2.size() < visible_characters2:
 				line2done = true
 			
-			var visible_characters3 = visible_characters2-splitLine2.size()
+			var visible_characters3 = max(0,visible_characters2-splitLine2.size())
 			
 			if splitLine3.size() > 0 and splitLine3.size() > visible_characters3 and line2done:
 				splitLine3[visible_characters3].visible = true
@@ -288,17 +290,42 @@ func _process(delta):
 				commaTimer.start()
 			
 	
-	if Input.is_action_just_pressed("cancel"):
-			for i in splitLine1:
-				i.visible = true
-			for i in splitLine2:
-				i.visible = true
-			for i in splitLine3:
-				i.visible = true
-			visible_characters = 999
-			periodTimer.stop()
-			commaTimer.stop()
+	if Input.is_action_just_pressed("cancel") and canSkip:
+		for i in splitLine1:
+			i.visible = true
+		for i in splitLine2:
+			i.visible = true
+		for i in splitLine3:
+			i.visible = true
+		visible_characters = 999
+		splitLine1 = []
+		splitLine2 = []
+		splitLine3 = []
+		periodTimer.stop()
+		commaTimer.stop()
 
+func resetLine():
+	if dialogueScript.textEffectArray.size() < page:
+		textEffect = dialogueScript.textEffectArray[page]
+	else:
+		useTextEffect = false
+	for i in text.get_children():
+		i.queue_free()
+	splitLine1 = []
+	splitLine2 = []
+	splitLine3 = []
+	Line1Hash = Label.new()
+	Line2Hash = Label.new()
+	Line3Hash = Label.new()
+	letterWidthArray1 = []
+	letterWidthArray2 = []
+	letterWidthArray3 = []
+	line1done = false
+	line2done = false
+	line3done = false
+	effectTimer = 0
+	visible_characters = 0
+	set_up_line()
 
 func _on_animated_sprite_2d_animation_looped():
 	if sprite.sprite_frames != null:
