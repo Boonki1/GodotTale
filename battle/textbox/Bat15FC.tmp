@@ -1,0 +1,82 @@
+[gd_scene load_steps=8 format=3 uid="uid://mtu30mfbq7h6"]
+
+[ext_resource type="Script" path="res://battle/textbox/BattleTextbox.gd" id="1_82k0d"]
+[ext_resource type="Script" path="res://battle/textbox/BattleDialogueScript.gd" id="2_ufs5o"]
+[ext_resource type="LabelSettings" uid="uid://dh3sml5457ddq" path="res://dialogue/Textbox.tres" id="4_vq0bk"]
+[ext_resource type="Texture2D" uid="uid://1a6p0v8vegmm" path="res://dialogue/face/spr_floweynice_0.png" id="5_3o4vg"]
+[ext_resource type="Texture2D" uid="uid://c5xt8gwccemqr" path="res://dialogue/face/spr_floweynice_1.png" id="6_tvtpv"]
+[ext_resource type="AudioStream" uid="uid://c2g8uxtkplvqc" path="res://dialogue/sounds/TXT1.wav" id="7_onf2o"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_k8jxp"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_3o4vg")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 0.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_3o4vg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_tvtpv")
+}],
+"loop": true,
+"name": &"talk",
+"speed": 6.0
+}]
+
+[node name="BattleTextbox" type="Control"]
+z_index = 999
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_82k0d")
+
+[node name="dialogueScript" type="Node" parent="."]
+script = ExtResource("2_ufs5o")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+scale = Vector2(2, 2)
+transform = Transform2D(2, 0, 0, 2, 0, 0)
+
+[node name="Text" type="Label" parent="CanvasLayer"]
+offset_left = 32.0
+offset_top = 146.5
+offset_right = 290.0
+offset_bottom = 211.5
+scale = Vector2(1.00285, 0.982773)
+text = "ERROR, this dialogue variable/ndoesn't exist"
+label_settings = ExtResource("4_vq0bk")
+visible_characters = 0
+visible_ratio = 0.0
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CanvasLayer"]
+position = Vector2(-163, 208)
+
+[node name="period timer" type="Timer" parent="."]
+wait_time = 0.25
+one_shot = true
+
+[node name="comma timer" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
+
+[node name="Faces" type="Node" parent="."]
+
+[node name="FloweyNice" type="AnimatedSprite2D" parent="Faces"]
+visible = false
+sprite_frames = SubResource("SpriteFrames_k8jxp")
+animation = &"talk"
+frame_progress = 0.961795
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_onf2o")
+
+[connection signal="animation_looped" from="CanvasLayer/AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_looped"]

@@ -1,12 +1,15 @@
-[gd_scene load_steps=21 format=3 uid="uid://cmmskdyow6j7v"]
+[gd_scene load_steps=26 format=3 uid="uid://cmmskdyow6j7v"]
 
 [ext_resource type="Script" path="res://battle/battle.gd" id="1_biix4"]
 [ext_resource type="Texture2D" uid="uid://c6sxntpkdncjw" path="res://battle/sprites/button/act.png" id="1_i0c17"]
 [ext_resource type="Texture2D" uid="uid://be34uxfm43i85" path="res://battle/sprites/button/fight.png" id="1_r68k2"]
 [ext_resource type="Texture2D" uid="uid://dyeghrx3qpn6e" path="res://battle/sprites/button/fight0.png" id="2_1j0lq"]
 [ext_resource type="PackedScene" uid="uid://d314wg6nt1vyv" path="res://battle/enemies/Froggit.tscn" id="2_2b3jl"]
+[ext_resource type="Texture2D" uid="uid://dyyef060vig1f" path="res://battle/bg/spr_battlebg/spr_battlebg_0.png" id="2_fcjl2"]
+[ext_resource type="PackedScene" uid="uid://mtu30mfbq7h6" path="res://battle/textbox/BattleTextbox.tscn" id="2_v63as"]
 [ext_resource type="Texture2D" uid="uid://b33tr1cajaliq" path="res://battle/sprites/button/act0.png" id="2_yb0ki"]
 [ext_resource type="Texture2D" uid="uid://bj1obrxtrw32n" path="res://battle/sprites/button/item.png" id="3_1p5cf"]
+[ext_resource type="Texture2D" uid="uid://b0tfl4er525rq" path="res://battle/bg/spr_battlebg/spr_battlebg_1.png" id="3_vn3ml"]
 [ext_resource type="Texture2D" uid="uid://b4p635bmjtdr6" path="res://battle/sprites/button/item0.png" id="4_c1alr"]
 [ext_resource type="Texture2D" uid="uid://hsarwapvlek2" path="res://battle/sprites/button/mercy.png" id="5_vp1l3"]
 [ext_resource type="Texture2D" uid="uid://p50g2ahoq8ip" path="res://battle/sprites/button/mercy0.png" id="6_7goab"]
@@ -14,6 +17,21 @@
 [ext_resource type="Texture2D" uid="uid://dltiyb7v0ug1p" path="res://battle/sprites/HP.png" id="11_qmj8h"]
 [ext_resource type="Texture2D" uid="uid://dw4h8wp204in" path="res://dialogue/MenuTiles.png" id="12_qcm6w"]
 [ext_resource type="PackedScene" uid="uid://bb0t6dgghm2ws" path="res://battle/heart.tscn" id="13_6eybr"]
+[ext_resource type="LabelSettings" uid="uid://dh3sml5457ddq" path="res://dialogue/Textbox.tres" id="16_rm7cp"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0uwy1"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_fcjl2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_vn3ml")
+}],
+"loop": true,
+"name": &"default",
+"speed": 0.0
+}]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_bl4fk"]
 animations = [{
@@ -80,10 +98,39 @@ size = Vector2(551, 3)
 [node name="Battle" type="Node2D"]
 script = ExtResource("1_biix4")
 
+[node name="BG" type="AnimatedSprite2D" parent="."]
+z_index = -1
+sprite_frames = SubResource("SpriteFrames_0uwy1")
+centered = false
+
+[node name="EnemyLabel" type="Label" parent="."]
+z_index = 1
+offset_left = 85.0
+offset_top = 271.0
+offset_right = 146.0
+offset_bottom = 287.0
+scale = Vector2(2, 2)
+text = "* Froggit"
+label_settings = ExtResource("16_rm7cp")
+visible_characters = 0
+visible_ratio = 0.0
+metadata/_edit_lock_ = true
+
+[node name="BattleTextbox" parent="." instance=ExtResource("2_v63as")]
+offset_left = 53.0
+offset_top = 271.0
+offset_right = 53.0
+offset_bottom = 271.0
+scale = Vector2(2, 2)
+metadata/_edit_lock_ = true
+
 [node name="enemies" type="Node" parent="."]
 
 [node name="Froggit" parent="enemies" instance=ExtResource("2_2b3jl")]
-position = Vector2(310, 178)
+position = Vector2(271, 188)
+
+[node name="Froggit2" parent="enemies" instance=ExtResource("2_2b3jl")]
+position = Vector2(473, 189)
 
 [node name="Heart" parent="." instance=ExtResource("13_6eybr")]
 z_index = 1

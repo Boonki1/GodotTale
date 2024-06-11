@@ -1,6 +1,7 @@
-AnimationPlayer
 AnimatedSprite2D
 Node2D
+Label
+AnimationPlayer
 Node
 CollisionShape2D
 CollisionPolygon2D
@@ -9,6 +10,5 @@ Sprite2D
 CharacterBody2D
 NinePatchRect
 Control
-Label
 ResourcePreloader
 PopupMenu

@@ -12,3 +12,10 @@ res://dialogue/Textbox.tscn
 res://menu/menu.tscn
 res://battle/heart.tscn
 res://battle/enemies/Froggit.tscn
+res://battle/textbox/BattleTextbox.tscn
+res://battle/textbox/BattleDialogueScript.gd
+res://battle/textbox/BattleTextbox.gd
+res://dialogue/Textbox.gd
+res://battle/battle.gd
+res://battle/enemies/Froggit.gd
+res://battle/heart.gd

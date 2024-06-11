@@ -2,7 +2,7 @@ extends Control
 
 var player = null
 var parent = null
-@onready var text = $CanvasLayer/NinePatchRect/Text
+@onready var text = $Text
 @onready var audio = $AudioStreamPlayer
 @onready var commaTimer = $"comma timer"
 @onready var dialogueScript = $dialogueScript
@@ -57,19 +57,11 @@ var Line1Hash = Label.new()
 var Line2Hash = Label.new()
 var Line3Hash = Label.new()
 
-func SetTextSound():
-	match faceSprite:
-		dialogueScript.textSound.default:
-			audio.stream = load("res://dialogue/sounds/TXT1.wav")
-		dialogueScript.textSound.flowey:
-			audio.stream = load("res://dialogue/sounds/floweytalk1.wav")
-
-func SetFaceSprite():
-	match faceSprite:
-		dialogueScript.face.NONE:
-			sprite.sprite_frames = null
-		dialogueScript.face.FLOWEYNICE:
-			sprite.sprite_frames = $Faces/FloweyNice.sprite_frames
+func _ready():
+	global.TextboxExists = true
+	set_up_line()
+	text.visible_characters = 0
+	text.position.x += 16
 
 func SetTextEffect(i1,i2,i3,labelX1,labelX2,labelX3,labelY1,labelY2,labelY3):
 	match textEffect:
@@ -93,73 +85,12 @@ func SetTextEffect(i1,i2,i3,labelX1,labelX2,labelX3,labelY1,labelY2,labelY3):
 			if line3.length() > 0:
 				splitLine3[i3].position = Vector2(labelX3,labelY3+lineSpacing*2+sin(effectTimer+i3))
 
-func _ready():
-	global.TextboxExists = true
-	set_up_line()
-
-func _draw():
-	var top = "Top"
-	var bottom = "Bottom"
-	if sprite.sprite_frames == null:
-		top = "Top"
-		bottom = "Bottom"
-	else:
-		top = "TopFace"
-		bottom = "BottomFace"
-	
-	if ScreenPosition == 1:
-		animation_player.play(top)
-	if ScreenPosition == 2:
-		animation_player.play(bottom)
-	if ScreenPosition == 0:
-		if playerCamPosition.y < 0:
-			animation_player.play(top)
-		else:
-			animation_player.play(bottom)
-	visible = true
-
 func set_up_line():
 	dialogueScript.dialogueSelected = curDialogue
 	
 	dialogueScript.setup()
 	
-	print(dialogueScript.dialogueArray)
-	
-	text.text = dialogueScript.dialogueArray[page]
-	
-	pageMax = dialogueScript.dialogueArray.size() - 1
-	
-	if parent.get_class() != "CanvasLayer":
-		ScreenPosition = parent.ScreenPosition
-		playerCamPosition = parent.playerCamPosition
-	
-	sprite.z_index = z_index + 1
-	
-	if dialogueScript.textEffectArray.size() > 0:
-		useTextEffect = true
-		textEffect = dialogueScript.textEffectArray[page]
-	else:
-		useTextEffect = false
-	
-	if dialogueScript.dialogueFaceArray.size() > 0:
-		useFaceSprite = true
-		faceSprite = dialogueScript.dialogueFaceArray[page]
-	else:
-		useFaceSprite = false
-	
-	if !useFaceSprite:
-		faceSprite = dialogueScript.face.NONE
-	
-	SetFaceSprite()
-	
-	if dialogueScript.textSoundArray.size() == 0:
-		textSound = dialogueScript.textSound.default
-	else:
-		textSound = dialogueScript.textSoundArray[page]
-	
-	SetTextSound()
-	
-	_draw()
+	text.text = dialogueScript.dialogueText
 	
 	#seperate text to 3 lines
 	if text.text.find("/n") >= -1:
@@ -312,8 +243,6 @@ func _process(delta):
 				effectTimer = 0
 				visible_characters = 0
 				set_up_line()
-			else:
-				close()
 		
 		if floor(visible_characters) == floor(old_visible_characters):
 			if splitLine1.size() > visible_characters:
@@ -352,18 +281,12 @@ func _process(delta):
 			if cur_character != " " and !line3done: 
 				audio.play()
 			
-			if line3done and parent.get_class() != "CanvasLayer":
-				parent.isTalking = false
-			
 			if (cur_character == "." or cur_character == "!" or cur_character == "?" or cur_character == ":") and !(next_character == "." or next_character == "!" or next_character == "?" or next_character == ":"):
 				periodTimer.start()
 			
 			if cur_character == "," and next_character != ",":
 				commaTimer.start()
 			
-			if sprite.sprite_frames != null:
-				if !line3done:
-					sprite.play("talk")
 	
 	if Input.is_action_just_pressed("cancel"):
 			for i in splitLine1:
@@ -375,15 +298,6 @@ func _process(delta):
 			visible_characters = 999
 			periodTimer.stop()
 			commaTimer.stop()
-
-func close():
-	if player != null:
-		player.canMove = true
-	global.TextboxExists = false
-	if parent.get_class() != "CanvasLayer":
-		if parent.OneTimeOnly == true:
-			parent.queue_free()
-	queue_free()
 
 
 func _on_animated_sprite_2d_animation_looped():
